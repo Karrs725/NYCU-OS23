@@ -24,7 +24,6 @@ void osh_loop(){
     do{
         line = osh_read_line();
         tokens = osh_tokenize(line);
-        printf("%s\n", tokens[0]);
         end_flag = token_recognize(tokens);
     } while (!end_flag);
 
@@ -54,11 +53,24 @@ char **osh_tokenize(char *line){
 }
 
 int token_recognize(char **tokens){
-    if (tokens[0] == NULL){
+    if(tokens[0] == NULL){
         return 0;
     }
 
+    if(strcmp(tokens[0], "exit") == 0){
+        printf("Process end\n");
+        return 1;
+    }
 
-    return 1;
-    
+    pid_t pid;
+
+    pid = fork();
+    if(pid == 0){
+        execvp(tokens[0], tokens);
+    }
+    else{
+        wait(NULL);
+    }
+
+    return 0;
 }
