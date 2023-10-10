@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Read parent pid, child pid
+path_flag=false
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --parent)
@@ -10,6 +11,10 @@ while [ "$#" -gt 0 ]; do
     --child)
       child="$2"
       shift 2
+      ;;
+    --path)
+      path_flag=true
+      shift
       ;;
     *)
       echo "Unknown parameter passed: $1"
@@ -28,5 +33,18 @@ fi
 # TODO #
 ########
 
-# The code below is only for demonstration purposes, please remove it before submitting.
-echo "parent pid: $parent, child pid: $child"
+path="$child"
+temp_pid="$child"
+
+while [ "$temp_pid" != 0 ]; do
+  if [ "$temp_pid" -eq "$parent" ]; then
+    echo "Yes"
+    if [ "$path_flag" = true ]; then
+      echo "$path"
+    fi
+    exit 0
+  fi
+  temp_pid=$(ps -o ppid= -p "$temp_pid" | tr -d ' ')
+  path="$temp_pid -> $path"
+done
+echo "No"
