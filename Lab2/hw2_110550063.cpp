@@ -1,30 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct process{
+struct Process{
     int arrival_time;
     int bust_time;
+    int remain_time;
+    int wait_time;
+    int turnaround_time;
 };
 
-void FCFS(process p, int t);
+struct Queue{
+    int mode;
+    int time_quantum;
+    vector<int> process_in_queue;
+};
+
+
 
 int main(){
     int N, M, time = 0;
-    vector<vector<int>> queues;
-    vector<process> processes;
+    vector<Queue> queues;
+    vector<Process> processes;
     cin >> N >> M;
     for (int i = 0; i < N; i++){
-        int mode, time_quantum;
-        vector<int> q;
-        cin >> mode >> time_quantum;
-        q.push_back(mode);
-        q.push_back(time_quantum);
+        Queue q;
+        cin >> q.mode >> q.time_quantum;
         queues.push_back(q);
     }
     for (int i = 0; i < M; i++){
-        process p;
+        Process p;
         cin >> p.arrival_time >> p.bust_time;
         processes.push_back(p);
-    }    
+    }
+
+    if (M == 1)
+    {
+        switch (queues[0].mode)
+        {
+        case 0:
+            /* code */
+            break;
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        default:
+            break;
+        }
+    }
+      
 }
 
