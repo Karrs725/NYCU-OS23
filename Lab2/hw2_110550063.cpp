@@ -157,11 +157,12 @@ int main(){
                         {
                             if (queues[0].process_in_queue[0].remain_time > processes[id].remain_time)
                             {
+                                processes[current_process].queue_time = global_time;
                                 Process temp_p = vector_pop_front(queues[0].process_in_queue);
                                 temp_p.queue_time = global_time;
-                                queues[1].process_in_queue.push_back(temp_p);
-                                processes[current_process].queue_time = global_time;
                                 current_process = id;
+                                queues[1].process_in_queue.push_back(temp_p);
+                                if (queues[1].mode == 1) sort(queues[1].process_in_queue.begin(), queues[1].process_in_queue.end(), SRTF_cmp);
                             }
                             sort(queues[0].process_in_queue.begin(), queues[0].process_in_queue.end(), SRTF_cmp);
                         }
