@@ -59,7 +59,6 @@ int main(){
         p.idx = i;
         processes.push_back(p);
     }
-    //cout << "INPUT COMPLETE\n";
 
     while (!end)
     {
@@ -172,18 +171,6 @@ int main(){
             id++;
         }
         
-        /*
-        cout << global_time << " " << id << " " << queue_now_processing << " " << current_process << "\n";
-        for (int i = 0; i < N; i++)
-        {
-            for (int j = 0; j < queues[i].process_in_queue.size(); j++)
-            {
-                cout << queues[i].process_in_queue[j].idx << " ";
-            }
-            cout << "\n";
-        }
-        */
-        
         /* do process */
         if (queues[queue_now_processing].process_in_queue.empty())
         {
@@ -252,8 +239,6 @@ int main(){
         
         /* end condition */
         if (done.size() == M) end = true;
-        
-        
         global_time++;
     }
 
@@ -263,7 +248,6 @@ int main(){
         total_turn_around_time += processes[i].turn_around_time;
         processes[i].wait_time = processes[i].turn_around_time - processes[i].burst_time;
         total_wait_time += processes[i].wait_time;
-        //cout << processes[i].complete_time << " " << processes[i].arrival_time << " " << processes[i].burst_time << "\n";
         cout << processes[i].wait_time << " " << processes[i].turn_around_time << "\n";
     }
     cout << total_wait_time << "\n";
