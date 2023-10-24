@@ -38,21 +38,6 @@ Process vector_pop_front(vector<Process> &v){
     return p;
 }
 
-void sort_queue(queue<Process> &q){
-    vector<Process> v;
-    while (!q.empty())
-    {
-        v.push_back(q.front());
-        q.pop();
-    }
-    sort(v.begin(), v.end(), SRTF_cmp);
-    for (int i = 0; i < v.size(); i++)
-    {
-        q.push(v[i]);
-    }
-    v.clear();
-}
-
 int main(){
     int N, M, global_time = 0, id = 0, queue_now_processing = 0, current_process, total_turn_around_time = 0, total_wait_time = 0;
     bool end = false, is_complete = true;
@@ -129,7 +114,7 @@ int main(){
                             queues[0].process_in_queue.push_back(processes[id]);
                             sort(queues[0].process_in_queue.begin(), queues[0].process_in_queue.end(), SRTF_cmp);
                         }
-                        if (queues[0].mode == 2)
+                        else if (queues[0].mode == 2)
                         {
                             if (queues[0].process_in_queue[queues[0].process_in_queue.size() - 1].queue_time == processes[id].queue_time)
                             {
@@ -195,7 +180,8 @@ int main(){
                 cout << queues[i].process_in_queue[j].idx << " ";
             }
             cout << "\n";
-        }*/
+        }
+        */
         
         /* do process */
         if (queues[queue_now_processing].process_in_queue.empty())
