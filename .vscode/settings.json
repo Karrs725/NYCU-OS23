@@ -3,6 +3,7 @@
         "wait.h": "c",
         "unistd.h": "c",
         "thread": "cpp",
-        "mutex": "cpp"
+        "mutex": "cpp",
+        "iostream": "cpp"
     }
 }

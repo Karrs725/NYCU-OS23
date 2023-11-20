@@ -2,7 +2,7 @@
 #include <iostream>
 #include <mutex>
 #include <random>
-#include <semaphore.h>
+#include <semaphore>
 #include <thread>
 #include <vector>
 
