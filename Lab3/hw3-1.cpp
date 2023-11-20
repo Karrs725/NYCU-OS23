@@ -1,19 +1,24 @@
 #include <iostream>
 #include <thread>
 #include <mutex>
-#include <semaphore.h>
 
 using namespace std;
 
-sem_t semaphore;
+int next_index = 0;
 
 void count(int index) {
+  static mutex io_mutex;
   int num = 1000000;
   while (num--) {}
   {
-    sem_wait(&semaphore);
+    unique_lock<mutex> lock(io_mutex);
+    while (index != next_index) {
+      lock.unlock();
+      lock.lock();
+    }
+    
     cout << "I'm thread " << index << ", local count: 1000000\n";
-    sem_post(&semaphore);
+    next_index++;
   }
 }
 
