@@ -65,6 +65,7 @@ void maximum_independent_set(int v) {
           vertex_checked[u] = false;
       }
     }
+    
   }
 }
 
