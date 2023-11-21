@@ -1,10 +1,12 @@
 #include <iostream>
 #include <thread>
 #include <string.h>
+#include <mutex>
 
 using namespace std;
 
 int n, global_count = 0;
+mutex mtx;
 
 bool is_prime(int num) {
     if (num == 1) return false;
@@ -18,9 +20,12 @@ bool is_prime(int num) {
 }
 
 void check(int start, int end) {
+    int local_count = 0;
     for (int i = start; i <= end; i++) {
-        if (is_prime(i)) global_count++;
+        if (is_prime(i)) local_count++;
     }
+    lock_guard<mutex> lock(mtx);
+    global_count += local_count;
 }
 
 int main(int argc, char* argv[]) {
@@ -40,7 +45,6 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < num_of_thread; i++) {
         int start = i * chunk_size + 1;
         int end = (i != num_of_thread - 1) ? (i + 1) * chunk_size : n;
-        cout << start << " " << end << endl;
         t[i] = thread(check, start, end);
     }
 
