@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "hw3-2.cpp"
-g++ --std=c++2a hw3-2.cpp 
+g++ --std=c++2a hw3-2.cpp -pthread
 if [ $? -eq 0 ]; then
   # small testcases: test for deadlock or unconverged
   for testcase in 1 2 3
@@ -15,7 +15,7 @@ if [ $? -eq 0 ]; then
       fi
     done
     if [ $tle -eq 0 ]; then
-      python val.py $testcase ans.txt
+      python3 val.py $testcase ans.txt
       if [ $? -eq 0 ]; then
         echo "testcase $testcase: AC"
       else
@@ -31,7 +31,7 @@ if [ $? -eq 0 ]; then
   do
     timeout 3.5 ./a.out < testcase/case$testcase.txt > ans.txt
     if [ $? -eq 0 ]; then
-      python val.py $testcase ans.txt
+      python3 val.py $testcase ans.txt
       if [ $? -eq 0 ]; then
         echo "testcase $testcase: AC"
       else

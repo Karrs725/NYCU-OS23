@@ -51,8 +51,8 @@ bool best_response(int v) {
 
 void maximum_independent_set(int v) {
   bool converged = false;
-
   while (!converged) {
+    //lock_guard<mutex> lock(mutexes[0]);
     if (vertex_checked[v]) {
       converged = is_converged();
     } else {
