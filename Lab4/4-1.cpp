@@ -6,8 +6,9 @@ using namespace std;
 int main(){
     int cache_num, stream_size, data, total_misses = 0;
     bool is_hit;
-    vector<int> cache(cache_num, -1);
+    vector<int> cache;
     cin >> cache_num >> stream_size;
+    for (int i = 0; i < cache_num; i++) cache.push_back(-1);
     for (int i = 0; i < stream_size; i++)
     {
         is_hit = false;
